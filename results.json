@@ -1,0 +1,45 @@
+{
+  "name": "Yash Shende",
+  "roll_no": "24b0360",
+  "seed": 42,
+  "training_setup": {
+    "optimizer": "SGD (momentum 0.9, weight decay 5e-4)",
+    "learning_rate_schedule": "Cosine annealing from 0.1 to 1e-4 over 60 epochs (stepped per epoch)",
+    "batch_size": 128,
+    "epochs": 60,
+    "augmentation": "RandomCrop(32, padding=4) + RandomHorizontalFlip, CIFAR mean/std normalization",
+    "gpu_used": "NVIDIA GeForce RTX 4060 Laptop GPU (8 GB)"
+  },
+  "task1": {
+    "noise_rate": 40.24,
+    "val_acc_noisy_labels__clean_ref_model": 59.04,
+    "val_acc_noisy_labels__noisy_ce_model": 49.34
+  },
+  "task2": {
+    "memorization_start_epoch": 40,
+    "early_stop_epoch": 41,
+    "val_acc_noisy_labels_at_early_stop": 55.46
+  },
+  "task3": {
+    "method": "Early-learning checkpoint ensemble: score = 1 - mean softmax probability of the noisy label over epochs 25/30/35/38/41 of the Task 1 noisy CE run"
+  },
+  "task4": {
+    "methods": [
+      {
+        "name": "Symmetric Cross Entropy (SCE)",
+        "file": "t4_sce.csv",
+        "val_acc_noisy_labels": 55.98
+      },
+      {
+        "name": "Task3 Confident Relabeling (CSR)",
+        "file": "t4_relabel.csv",
+        "val_acc_noisy_labels": 56.04
+      }
+    ],
+    "best_method": "Task3 Confident Relabeling (CSR)"
+  },
+  "task5": {
+    "val_acc_synthetic_labels__baseline": 43.88,
+    "val_acc_synthetic_labels__best_method": 43.26
+  }
+}
